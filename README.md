@@ -1,33 +1,39 @@
 # Smart Brain Web App API Deno
-Face Detection Web App API recreated in Deno.
+Face Detection Web App API rewritten in Deno.
 
 ## Functionality
 The API can be used to register users, signin a user, get a profile by its id, and send an image to Clarifai Face Detection API. It also keeps track of how many images were sent by each user.
-=> I STOPPED HERE
-## Frameworks
+
+## Tech Stack
+Front-end: React<br>
+Back-end: Deno<br>
+Database: PostgreSQL<br>
+
+## Backend Frameworks
 1. Clarifai API
-2. bcrypt-nodejs
-3. Knex
-4. Pg
+2. Oak Router
+3. Bcrypt
+4. Deno-Postgres
 5. Cors
-6. Express
-7. Nodemon
+6. Deno Standard Library
 
 ## Installation
-1. Clone this repo
-2. Run `npm install`
-3. Connect server.js to your database.
-4. Include Clarifai API Key in controllers/image.js
-5. Run `npm start`
-
-## Backend API
-Ensure the backend is running, by making a GET request to http://localhost:3001/ (you can change the port by providing an environment variable)
+1. Install Deno from https://deno.land/
+2. Clone this repo
+3. Run the following command in terminal: `deno run -A src/mod.ts`
 
 ## Frontend
 Frontend Repo be found [HERE](https://github.com/karimkhattaby/smart-brain)
 
+## Backend API
+Ensure the backend is running, by making a GET request to http://localhost:3002/
+
+## Backend Node.js API
+This project was initially written in javascript using Node.js as the backend. You can find it by clicking [HERE](https://github.com/karimkhattaby/smart-brain-api).
+
 ## Hosted Version
-The latest version is deployed and hosted on Heroku. Check it out by clicking [HERE](https://smart-brain-karim.herokuapp.com/).
+The latest version is deployed and hosted on Heroku. Check it out by clicking [HERE](https://smart-brain-karim.herokuapp.com/).<br>
+Note: The hosted version's backend is Node.js
 
 ## Usage
 1. You can login using these credentials:
