@@ -100,5 +100,25 @@ router.put("/image", async (ctx) => {
     }
 });
 
+// POST ImageURL
+router.post("/imageurl", async (ctx) => {
+    // Extract Request Body
+    const body = await ctx.request.body();
+
+    // Check for Bad Requests
+    if ( !body.value.input ) {
+        ctx.throw(400, "Bad Request");
+    } else {
+        const result = await image.handleAPICall(body.value.input);
+        //console.log(result);
+        if (result === "API Error") {
+            ctx.throw(400, "API Error");
+        } else {
+            ctx.response.body = result;
+            ctx.response.status = 200;
+        }
+    }
+});
+
 // Exporting the Router
 export default router;
