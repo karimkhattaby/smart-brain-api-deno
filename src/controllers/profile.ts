@@ -5,7 +5,7 @@ import { Client } from "../deps.ts";
 export function handleProfileGet(id : number, db: Client) {
     // query the database for the user object
     return db.query({
-        text: "SELECT * FROM users WHERE id = $1",
+        text: "SELECT * FROM users WHERE id = $1;",
         args: [id]
     })
     .then(result => {

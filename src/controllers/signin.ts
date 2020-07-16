@@ -10,7 +10,7 @@ interface loginDetails {
 // SignIn Handler, returns the result of querying the database for given email and password
 export function handleSignin(data : loginDetails, db : Client) {
     return db.query({
-        text: "SELECT email, hash FROM login WHERE email = $1",
+        text: "SELECT email, hash FROM login WHERE email = $1;",
         args: [data.email]
     })
     .then(result => {
@@ -18,7 +18,7 @@ export function handleSignin(data : loginDetails, db : Client) {
         if (result.rows.length > 0 && bcrypt.compareSync(data.password, result.rows[0][1])) {
             // query the database for the user object
             return db.query({
-                    text: "SELECT * FROM users WHERE email = $1",
+                    text: "SELECT * FROM users WHERE email = $1;",
                     args: [data.email]
                 })
                 .then(result2 => {
