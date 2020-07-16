@@ -5,6 +5,7 @@ import { Router, Client } from "./deps.ts";
 import * as signin from "./controllers/signin.ts";
 import * as register from "./controllers/register.ts";
 import * as profile from "./controllers/profile.ts";
+import * as image from "./controllers/image.ts";
 
 // Importing Database Settings
 import db_settings from "../private/db.config.ts"
@@ -77,6 +78,25 @@ router.get("/profile/:id", async (ctx) => {
     }
     else {
         ctx.throw(400, "Bad Request");
+    }
+});
+
+// PUT Image
+router.put("/image", async (ctx) => {
+    // Extract Request Body
+    const body = await ctx.request.body();
+
+    // Check for Bad Requests
+    if ( !body.value.id ) {
+        ctx.throw(400, "Bad Request");
+    } else {
+        const result = await image.handleImage(Number(body.value.id), db);
+        if (result === "User Not Found") {
+            ctx.throw(400, "User Not Found");
+        } else {
+            ctx.response.body = result;
+            ctx.response.status = 200;
+        }
     }
 });
 
