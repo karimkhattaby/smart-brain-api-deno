@@ -3,6 +3,7 @@ import { Router, Client } from "./deps.ts";
 
 // Importing Controllers
 import * as signin from "./controllers/signin.ts";
+import * as register from "./controllers/register.ts";
 
 // Importing Database Settings
 import db_settings from "../private/db.config.ts"
@@ -21,20 +22,42 @@ router.get("/", (ctx) => {
 
 // POST SignIn
 router.post("/signin", async (ctx) => {
-    // Extract Body
+    // Extract Request Body
     const body = await ctx.request.body();
 
     // Check for Bad Requests
     if ( !body.value.email || !body.value.password ) {
-        ctx.response.body = "Bad Request";
-        ctx.response.status = 400;
+        ctx.throw(400, "Incorrect Login Form Submission");
     } else {
         const result = await signin.handleSignin(body.value, db);
-        ctx.response.body = result;
         // Check for Errors
         if (result === "Wrong Credentials" || result === "Unable to Get User") {
-            ctx.response.status = 400;
+            ctx.throw(400, result);
         } else {
+            ctx.response.body = result;
+            ctx.response.status = 200;
+        }
+    }
+});
+
+// POST Register
+router.post("/register", async (ctx) => {
+    // Extract Request Body
+    const body = await ctx.request.body();
+
+    // Check for Bad Requests
+    if ( !body.value.email || !body.value.password || !body.value.name ) {
+        ctx.throw(400, "Incorrect Registration Form Submission");
+    } else {
+        let result = await register.handleRegister(body.value, db);
+
+        // Check for Errors
+        if (result === "Unable to Register") {
+            ctx.throw(400, result);
+        } else {
+            // Log the User In
+            result = await signin.handleSignin(body.value, db);
+            ctx.response.body = result;
             ctx.response.status = 201;
         }
     }
