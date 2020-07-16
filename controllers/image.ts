@@ -2,7 +2,7 @@
 import { Client } from "../deps.ts";
 
 // Importing API Key
-import apiKey from "../../private/apiKey.ts";
+import apiKey from "../private/apiKey.ts";
 
 // ImageURL Handler
 export function handleAPICall(input : string) {

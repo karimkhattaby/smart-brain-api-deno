@@ -20,7 +20,7 @@ Database: PostgreSQL<br>
 ## Installation
 1. Install Deno from https://deno.land/
 2. Clone this repo
-3. Run the following command in terminal: `deno run -A src/mod.ts`
+3. Run the following command in terminal: `deno run -A mod.ts`
 
 ## Frontend
 Frontend Repo be found [HERE](https://github.com/karimkhattaby/smart-brain)

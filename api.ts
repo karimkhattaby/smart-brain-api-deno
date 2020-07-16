@@ -8,7 +8,7 @@ import * as profile from "./controllers/profile.ts";
 import * as image from "./controllers/image.ts";
 
 // Importing Database Settings
-import db_settings from "../private/db.config.ts"
+import db_settings from "./private/db.config.ts"
 
 // Initializing API Calls Router
 const router = new Router();
