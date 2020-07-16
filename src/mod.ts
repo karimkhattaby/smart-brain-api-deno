@@ -1,5 +1,5 @@
 // Importing Core Dependencies
-import { log, Application } from "./deps.ts";
+import { log, Application, oakCors } from "./deps.ts";
 
 // Importing API Calls
 import api from "./api.ts";
@@ -50,6 +50,9 @@ app.use(async (ctx, next) => {
     const delta = Date.now() - start;
     ctx.response.headers.set("X-Response-Time", `${delta}ms`);
 });
+
+// Enabling CORS for All Routes
+app.use(oakCors());
 
 // Registering Routes
 app.use(api.routes());
