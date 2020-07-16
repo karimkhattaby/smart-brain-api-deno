@@ -1,7 +1,24 @@
 // Importing Dependencies
 import { Client } from "../deps.ts";
 
-// image handler
+// Importing API Key
+import apiKey from "../../private/apiKey.ts";
+
+// ImageURL Handler
+export function handleAPICall(input : string) {
+    return fetch("https://api.clarifai.com/v2/models/a403429f2ddf4b49b307e318f00e528b/outputs", {
+        method: "POST",
+        headers: {
+            "Authorization": "Key "+apiKey,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({inputs: [{data: {image: {url: input}}}]})
+    })
+    .then(data => data.json())
+    .catch(() => "API Error");
+}
+
+// Image Handler
 export function handleImage(id : number, db: Client) {
     // query the database for the user object
     return db.query({
