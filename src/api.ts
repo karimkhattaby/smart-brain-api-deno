@@ -4,6 +4,7 @@ import { Router, Client } from "./deps.ts";
 // Importing Controllers
 import * as signin from "./controllers/signin.ts";
 import * as register from "./controllers/register.ts";
+import * as profile from "./controllers/profile.ts";
 
 // Importing Database Settings
 import db_settings from "../private/db.config.ts"
@@ -60,6 +61,22 @@ router.post("/register", async (ctx) => {
             ctx.response.body = result;
             ctx.response.status = 201;
         }
+    }
+});
+
+// GET Profile
+router.get("/profile/:id", async (ctx) => {
+    if (ctx.params?.id) {
+        const result = await profile.handleProfileGet(Number(ctx.params.id), db);
+        if (result === "User Not Found") {
+            ctx.throw(400, "User Not Found");
+        } else {
+            ctx.response.body = result;
+            ctx.response.status = 200;
+        }
+    }
+    else {
+        ctx.throw(400, "Bad Request");
     }
 });
 
