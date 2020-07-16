@@ -1,5 +1,5 @@
 // Importing Dependencies
-import { Client, bcrypt} from "../deps.ts";
+import { Client, bcrypt } from "../deps.ts";
 
 // Object Declaration
 interface loginDetails {
@@ -23,7 +23,7 @@ export function handleSignin(data : loginDetails, db : Client) {
                 })
                 .then(result2 => {
                     // if the query result has data
-                    if (result.rows.length > 0){
+                    if (result2.rows.length > 0){
                         // return the user object
                         const user = {
                             id: result2.rows[0][0],
