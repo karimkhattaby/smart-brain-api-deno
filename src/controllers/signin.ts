@@ -25,7 +25,14 @@ export function handleSignin(data : loginDetails, db : Client) {
                     // if the query result has data
                     if (result.rows.length > 0){
                         // return the user object
-                        return result2.rows[0];
+                        const user = {
+                            id: result2.rows[0][0],
+                            name: result2.rows[0][1],
+                            email: result2.rows[0][2],
+                            entries: result2.rows[0][3],
+                            joined: result2.rows[0][4]
+                        };
+                        return user;
                     } else {
                         // if the query result is empty, throw an error
                         throw Error("Unable to Get User");
